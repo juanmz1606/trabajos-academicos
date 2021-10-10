@@ -18,7 +18,7 @@ export class SolicitudLineaInvestigacionController {
     public solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/linea-investigacion', {
+  @get('/solicitudes/{id}/linea-investigacion', {
     responses: {
       '200': {
         description: 'LineaInvestigacion belonging to Solicitud',

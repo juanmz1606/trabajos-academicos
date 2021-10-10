@@ -18,7 +18,7 @@ export class ResultadoEvaluacionInvitacionEvaluarController {
     public resultadoEvaluacionRepository: ResultadoEvaluacionRepository,
   ) { }
 
-  @get('/resultado-evaluacions/{id}/invitacion-evaluar', {
+  @get('/resultados-evaluacion/{id}/invitacion-evaluar', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar belonging to ResultadoEvaluacion',

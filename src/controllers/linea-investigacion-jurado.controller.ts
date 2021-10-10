@@ -27,7 +27,7 @@ export class LineaInvestigacionJuradoController {
     @repository(LineaInvestigacionRepository) protected lineaInvestigacionRepository: LineaInvestigacionRepository,
   ) { }
 
-  @get('/linea-investigacions/{id}/jurados', {
+  @get('/lineas-investigacion/{id}/jurados', {
     responses: {
       '200': {
         description: 'Array of LineaInvestigacion has many Jurado through JuradoLineaInvestigacion',
@@ -46,7 +46,7 @@ export class LineaInvestigacionJuradoController {
     return this.lineaInvestigacionRepository.jurados(id).find(filter);
   }
 
-  @post('/linea-investigacions/{id}/jurados', {
+  @post('/lineas-investigacion/{id}/jurados', {
     responses: {
       '200': {
         description: 'create a Jurado model instance',
@@ -70,7 +70,7 @@ export class LineaInvestigacionJuradoController {
     return this.lineaInvestigacionRepository.jurados(id).create(jurado);
   }
 
-  @patch('/linea-investigacions/{id}/jurados', {
+  @patch('/lineas-investigacion/{id}/jurados', {
     responses: {
       '200': {
         description: 'LineaInvestigacion.Jurado PATCH success count',
@@ -93,7 +93,7 @@ export class LineaInvestigacionJuradoController {
     return this.lineaInvestigacionRepository.jurados(id).patch(jurado, where);
   }
 
-  @del('/linea-investigacions/{id}/jurados', {
+  @del('/lineas-investigacion/{id}/jurados', {
     responses: {
       '200': {
         description: 'LineaInvestigacion.Jurado DELETE success count',

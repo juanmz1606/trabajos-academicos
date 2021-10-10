@@ -26,7 +26,7 @@ export class TipoVinculacionProponenteController {
     @repository(TipoVinculacionRepository) protected tipoVinculacionRepository: TipoVinculacionRepository,
   ) { }
 
-  @get('/tipo-vinculacions/{id}/proponentes', {
+  @get('/tipos-vinculacion/{id}/proponentes', {
     responses: {
       '200': {
         description: 'Array of TipoVinculacion has many Proponente',
@@ -45,7 +45,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).find(filter);
   }
 
-  @post('/tipo-vinculacions/{id}/proponentes', {
+  @post('/tipos-vinculacion/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion model instance',
@@ -70,7 +70,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).create(proponente);
   }
 
-  @patch('/tipo-vinculacions/{id}/proponentes', {
+  @patch('/tipos-vinculacion/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion.Proponente PATCH success count',
@@ -93,7 +93,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).patch(proponente, where);
   }
 
-  @del('/tipo-vinculacions/{id}/proponentes', {
+  @del('/tipos-vinculacion/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion.Proponente DELETE success count',

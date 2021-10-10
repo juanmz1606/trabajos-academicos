@@ -18,7 +18,7 @@ export class SolicitudModalidadController {
     public solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/modalidad', {
+  @get('/solicitudes/{id}/modalidad', {
     responses: {
       '200': {
         description: 'Modalidad belonging to Solicitud',

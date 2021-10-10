@@ -26,7 +26,7 @@ export class JuradoInvitacionEvaluarController {
     @repository(JuradoRepository) protected juradoRepository: JuradoRepository,
   ) { }
 
-  @get('/jurados/{id}/invitacion-evaluars', {
+  @get('/jurados/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Array of Jurado has many InvitacionEvaluar',
@@ -45,7 +45,7 @@ export class JuradoInvitacionEvaluarController {
     return this.juradoRepository.invitacionesEvaluar(id).find(filter);
   }
 
-  @post('/jurados/{id}/invitacion-evaluars', {
+  @post('/jurados/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Jurado model instance',
@@ -70,7 +70,7 @@ export class JuradoInvitacionEvaluarController {
     return this.juradoRepository.invitacionesEvaluar(id).create(invitacionEvaluar);
   }
 
-  @patch('/jurados/{id}/invitacion-evaluars', {
+  @patch('/jurados/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Jurado.InvitacionEvaluar PATCH success count',
@@ -93,7 +93,7 @@ export class JuradoInvitacionEvaluarController {
     return this.juradoRepository.invitacionesEvaluar(id).patch(invitacionEvaluar, where);
   }
 
-  @del('/jurados/{id}/invitacion-evaluars', {
+  @del('/jurados/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Jurado.InvitacionEvaluar DELETE success count',

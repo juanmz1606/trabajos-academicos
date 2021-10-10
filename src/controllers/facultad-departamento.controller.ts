@@ -26,7 +26,7 @@ export class FacultadDepartamentoController {
     @repository(FacultadRepository) protected facultadRepository: FacultadRepository,
   ) { }
 
-  @get('/facultads/{id}/departamentos', {
+  @get('/facultades/{id}/departamentos', {
     responses: {
       '200': {
         description: 'Array of Facultad has many Departamento',
@@ -45,7 +45,7 @@ export class FacultadDepartamentoController {
     return this.facultadRepository.departamentos(id).find(filter);
   }
 
-  @post('/facultads/{id}/departamentos', {
+  @post('/facultades/{id}/departamentos', {
     responses: {
       '200': {
         description: 'Facultad model instance',
@@ -70,7 +70,7 @@ export class FacultadDepartamentoController {
     return this.facultadRepository.departamentos(id).create(departamento);
   }
 
-  @patch('/facultads/{id}/departamentos', {
+  @patch('/facultades/{id}/departamentos', {
     responses: {
       '200': {
         description: 'Facultad.Departamento PATCH success count',
@@ -93,7 +93,7 @@ export class FacultadDepartamentoController {
     return this.facultadRepository.departamentos(id).patch(departamento, where);
   }
 
-  @del('/facultads/{id}/departamentos', {
+  @del('/facultades/{id}/departamentos', {
     responses: {
       '200': {
         description: 'Facultad.Departamento DELETE success count',

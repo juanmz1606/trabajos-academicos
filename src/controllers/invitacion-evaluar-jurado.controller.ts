@@ -18,7 +18,7 @@ export class InvitacionEvaluarJuradoController {
     public invitacionEvaluarRepository: InvitacionEvaluarRepository,
   ) { }
 
-  @get('/invitacion-evaluars/{id}/jurado', {
+  @get('/invitaciones-evaluar/{id}/jurado', {
     responses: {
       '200': {
         description: 'Jurado belonging to InvitacionEvaluar',

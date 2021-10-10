@@ -18,7 +18,7 @@ export class SolicitudEstadoSolicitudController {
     public solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/estado-solicitud', {
+  @get('/solicitudes/{id}/estado-solicitud', {
     responses: {
       '200': {
         description: 'EstadoSolicitud belonging to Solicitud',

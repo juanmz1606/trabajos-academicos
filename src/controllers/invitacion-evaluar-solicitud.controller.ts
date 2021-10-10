@@ -18,7 +18,7 @@ export class InvitacionEvaluarSolicitudController {
     public invitacionEvaluarRepository: InvitacionEvaluarRepository,
   ) { }
 
-  @get('/invitacion-evaluars/{id}/solicitud', {
+  @get('/invitaciones-evaluar/{id}/solicitud', {
     responses: {
       '200': {
         description: 'Solicitud belonging to InvitacionEvaluar',

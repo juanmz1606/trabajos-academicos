@@ -26,7 +26,7 @@ export class EstadoSolicitudSolicitudController {
     @repository(EstadoSolicitudRepository) protected estadoSolicitudRepository: EstadoSolicitudRepository,
   ) { }
 
-  @get('/estado-solicituds/{id}/solicituds', {
+  @get('/estados-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Array of EstadoSolicitud has many Solicitud',
@@ -45,7 +45,7 @@ export class EstadoSolicitudSolicitudController {
     return this.estadoSolicitudRepository.solicitudes(id).find(filter);
   }
 
-  @post('/estado-solicituds/{id}/solicituds', {
+  @post('/estados-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'EstadoSolicitud model instance',
@@ -70,7 +70,7 @@ export class EstadoSolicitudSolicitudController {
     return this.estadoSolicitudRepository.solicitudes(id).create(solicitud);
   }
 
-  @patch('/estado-solicituds/{id}/solicituds', {
+  @patch('/estados-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'EstadoSolicitud.Solicitud PATCH success count',
@@ -93,7 +93,7 @@ export class EstadoSolicitudSolicitudController {
     return this.estadoSolicitudRepository.solicitudes(id).patch(solicitud, where);
   }
 
-  @del('/estado-solicituds/{id}/solicituds', {
+  @del('/estados-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'EstadoSolicitud.Solicitud DELETE success count',

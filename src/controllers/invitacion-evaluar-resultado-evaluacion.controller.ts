@@ -26,7 +26,7 @@ export class InvitacionEvaluarResultadoEvaluacionController {
     @repository(InvitacionEvaluarRepository) protected invitacionEvaluarRepository: InvitacionEvaluarRepository,
   ) { }
 
-  @get('/invitacion-evaluars/{id}/resultado-evaluacions', {
+  @get('/invitaciones-evaluar/{id}/resultados-evaluacion', {
     responses: {
       '200': {
         description: 'Array of InvitacionEvaluar has many ResultadoEvaluacion',
@@ -45,7 +45,7 @@ export class InvitacionEvaluarResultadoEvaluacionController {
     return this.invitacionEvaluarRepository.resultadosEvaluacion(id).find(filter);
   }
 
-  @post('/invitacion-evaluars/{id}/resultado-evaluacions', {
+  @post('/invitaciones-evaluar/{id}/resultados-evaluacion', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar model instance',
@@ -70,7 +70,7 @@ export class InvitacionEvaluarResultadoEvaluacionController {
     return this.invitacionEvaluarRepository.resultadosEvaluacion(id).create(resultadoEvaluacion);
   }
 
-  @patch('/invitacion-evaluars/{id}/resultado-evaluacions', {
+  @patch('/invitaciones-evaluar/{id}/resultados-evaluacion', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar.ResultadoEvaluacion PATCH success count',
@@ -93,7 +93,7 @@ export class InvitacionEvaluarResultadoEvaluacionController {
     return this.invitacionEvaluarRepository.resultadosEvaluacion(id).patch(resultadoEvaluacion, where);
   }
 
-  @del('/invitacion-evaluars/{id}/resultado-evaluacions', {
+  @del('/invitaciones-evaluar/{id}/resultados-evaluacion', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar.ResultadoEvaluacion DELETE success count',

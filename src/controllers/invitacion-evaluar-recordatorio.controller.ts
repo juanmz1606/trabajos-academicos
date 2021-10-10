@@ -26,7 +26,7 @@ export class InvitacionEvaluarRecordatorioController {
     @repository(InvitacionEvaluarRepository) protected invitacionEvaluarRepository: InvitacionEvaluarRepository,
   ) { }
 
-  @get('/invitacion-evaluars/{id}/recordatorios', {
+  @get('/invitaciones-evaluar/{id}/recordatorios', {
     responses: {
       '200': {
         description: 'Array of InvitacionEvaluar has many Recordatorio',
@@ -45,7 +45,7 @@ export class InvitacionEvaluarRecordatorioController {
     return this.invitacionEvaluarRepository.recordatorios(id).find(filter);
   }
 
-  @post('/invitacion-evaluars/{id}/recordatorios', {
+  @post('/invitaciones-evaluar/{id}/recordatorios', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar model instance',
@@ -70,7 +70,7 @@ export class InvitacionEvaluarRecordatorioController {
     return this.invitacionEvaluarRepository.recordatorios(id).create(recordatorio);
   }
 
-  @patch('/invitacion-evaluars/{id}/recordatorios', {
+  @patch('/invitaciones-evaluar/{id}/recordatorios', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar.Recordatorio PATCH success count',
@@ -93,7 +93,7 @@ export class InvitacionEvaluarRecordatorioController {
     return this.invitacionEvaluarRepository.recordatorios(id).patch(recordatorio, where);
   }
 
-  @del('/invitacion-evaluars/{id}/recordatorios', {
+  @del('/invitaciones-evaluar/{id}/recordatorios', {
     responses: {
       '200': {
         description: 'InvitacionEvaluar.Recordatorio DELETE success count',

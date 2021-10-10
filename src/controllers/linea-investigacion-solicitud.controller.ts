@@ -26,7 +26,7 @@ export class LineaInvestigacionSolicitudController {
     @repository(LineaInvestigacionRepository) protected lineaInvestigacionRepository: LineaInvestigacionRepository,
   ) { }
 
-  @get('/linea-investigacions/{id}/solicituds', {
+  @get('/lineas-investigacion/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Array of LineaInvestigacion has many Solicitud',
@@ -45,7 +45,7 @@ export class LineaInvestigacionSolicitudController {
     return this.lineaInvestigacionRepository.solicitudes(id).find(filter);
   }
 
-  @post('/linea-investigacions/{id}/solicituds', {
+  @post('/lineas-investigacion/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'LineaInvestigacion model instance',
@@ -70,7 +70,7 @@ export class LineaInvestigacionSolicitudController {
     return this.lineaInvestigacionRepository.solicitudes(id).create(solicitud);
   }
 
-  @patch('/linea-investigacions/{id}/solicituds', {
+  @patch('/lineas-investigacion/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'LineaInvestigacion.Solicitud PATCH success count',
@@ -93,7 +93,7 @@ export class LineaInvestigacionSolicitudController {
     return this.lineaInvestigacionRepository.solicitudes(id).patch(solicitud, where);
   }
 
-  @del('/linea-investigacions/{id}/solicituds', {
+  @del('/lineas-investigacion/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'LineaInvestigacion.Solicitud DELETE success count',

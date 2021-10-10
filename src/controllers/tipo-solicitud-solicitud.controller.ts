@@ -26,7 +26,7 @@ export class TipoSolicitudSolicitudController {
     @repository(TipoSolicitudRepository) protected tipoSolicitudRepository: TipoSolicitudRepository,
   ) { }
 
-  @get('/tipo-solicituds/{id}/solicituds', {
+  @get('/tipos-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Array of TipoSolicitud has many Solicitud',
@@ -45,7 +45,7 @@ export class TipoSolicitudSolicitudController {
     return this.tipoSolicitudRepository.solicitudes(id).find(filter);
   }
 
-  @post('/tipo-solicituds/{id}/solicituds', {
+  @post('/tipos-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'TipoSolicitud model instance',
@@ -70,7 +70,7 @@ export class TipoSolicitudSolicitudController {
     return this.tipoSolicitudRepository.solicitudes(id).create(solicitud);
   }
 
-  @patch('/tipo-solicituds/{id}/solicituds', {
+  @patch('/tipos-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'TipoSolicitud.Solicitud PATCH success count',
@@ -93,7 +93,7 @@ export class TipoSolicitudSolicitudController {
     return this.tipoSolicitudRepository.solicitudes(id).patch(solicitud, where);
   }
 
-  @del('/tipo-solicituds/{id}/solicituds', {
+  @del('/tipos-solicitud/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'TipoSolicitud.Solicitud DELETE success count',

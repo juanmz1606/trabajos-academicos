@@ -26,7 +26,7 @@ export class ModalidadSolicitudController {
     @repository(ModalidadRepository) protected modalidadRepository: ModalidadRepository,
   ) { }
 
-  @get('/modalidads/{id}/solicituds', {
+  @get('/modalidades/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Array of Modalidad has many Solicitud',
@@ -45,7 +45,7 @@ export class ModalidadSolicitudController {
     return this.modalidadRepository.solicitudes(id).find(filter);
   }
 
-  @post('/modalidads/{id}/solicituds', {
+  @post('/modalidades/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Modalidad model instance',
@@ -70,7 +70,7 @@ export class ModalidadSolicitudController {
     return this.modalidadRepository.solicitudes(id).create(solicitud);
   }
 
-  @patch('/modalidads/{id}/solicituds', {
+  @patch('/modalidades/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Modalidad.Solicitud PATCH success count',
@@ -93,7 +93,7 @@ export class ModalidadSolicitudController {
     return this.modalidadRepository.solicitudes(id).patch(solicitud, where);
   }
 
-  @del('/modalidads/{id}/solicituds', {
+  @del('/modalidades/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Modalidad.Solicitud DELETE success count',

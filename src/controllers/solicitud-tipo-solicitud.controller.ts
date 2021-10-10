@@ -18,7 +18,7 @@ export class SolicitudTipoSolicitudController {
     public solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/tipo-solicitud', {
+  @get('/solicitudes/{id}/tipo-solicitud', {
     responses: {
       '200': {
         description: 'TipoSolicitud belonging to Solicitud',

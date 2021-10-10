@@ -26,7 +26,7 @@ export class SolicitudInvitacionEvaluarController {
     @repository(SolicitudRepository) protected solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/invitacion-evaluars', {
+  @get('/solicitudes/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Array of Solicitud has many InvitacionEvaluar',
@@ -45,7 +45,7 @@ export class SolicitudInvitacionEvaluarController {
     return this.solicitudRepository.invitacionesEvaluar(id).find(filter);
   }
 
-  @post('/solicituds/{id}/invitacion-evaluars', {
+  @post('/solicitudes/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Solicitud model instance',
@@ -70,7 +70,7 @@ export class SolicitudInvitacionEvaluarController {
     return this.solicitudRepository.invitacionesEvaluar(id).create(invitacionEvaluar);
   }
 
-  @patch('/solicituds/{id}/invitacion-evaluars', {
+  @patch('/solicitudes/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Solicitud.InvitacionEvaluar PATCH success count',
@@ -93,7 +93,7 @@ export class SolicitudInvitacionEvaluarController {
     return this.solicitudRepository.invitacionesEvaluar(id).patch(invitacionEvaluar, where);
   }
 
-  @del('/solicituds/{id}/invitacion-evaluars', {
+  @del('/solicitudes/{id}/invitaciones-evaluar', {
     responses: {
       '200': {
         description: 'Solicitud.InvitacionEvaluar DELETE success count',

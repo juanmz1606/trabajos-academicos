@@ -27,7 +27,7 @@ export class SolicitudComiteController {
     @repository(SolicitudRepository) protected solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/comites', {
+  @get('/solicitudes/{id}/comites', {
     responses: {
       '200': {
         description: 'Array of Solicitud has many Comite through ComiteSolicitud',
@@ -46,7 +46,7 @@ export class SolicitudComiteController {
     return this.solicitudRepository.comites(id).find(filter);
   }
 
-  @post('/solicituds/{id}/comites', {
+  @post('/solicitudes/{id}/comites', {
     responses: {
       '200': {
         description: 'create a Comite model instance',
@@ -70,7 +70,7 @@ export class SolicitudComiteController {
     return this.solicitudRepository.comites(id).create(comite);
   }
 
-  @patch('/solicituds/{id}/comites', {
+  @patch('/solicitudes/{id}/comites', {
     responses: {
       '200': {
         description: 'Solicitud.Comite PATCH success count',
@@ -93,7 +93,7 @@ export class SolicitudComiteController {
     return this.solicitudRepository.comites(id).patch(comite, where);
   }
 
-  @del('/solicituds/{id}/comites', {
+  @del('/solicitudes/{id}/comites', {
     responses: {
       '200': {
         description: 'Solicitud.Comite DELETE success count',

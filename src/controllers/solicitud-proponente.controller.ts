@@ -27,7 +27,7 @@ export class SolicitudProponenteController {
     @repository(SolicitudRepository) protected solicitudRepository: SolicitudRepository,
   ) { }
 
-  @get('/solicituds/{id}/proponentes', {
+  @get('/solicitudes/{id}/proponentes', {
     responses: {
       '200': {
         description: 'Array of Solicitud has many Proponente through SolicitudProponente',
@@ -46,7 +46,7 @@ export class SolicitudProponenteController {
     return this.solicitudRepository.proponentes(id).find(filter);
   }
 
-  @post('/solicituds/{id}/proponentes', {
+  @post('/solicitudes/{id}/proponentes', {
     responses: {
       '200': {
         description: 'create a Proponente model instance',
@@ -70,7 +70,7 @@ export class SolicitudProponenteController {
     return this.solicitudRepository.proponentes(id).create(proponente);
   }
 
-  @patch('/solicituds/{id}/proponentes', {
+  @patch('/solicitudes/{id}/proponentes', {
     responses: {
       '200': {
         description: 'Solicitud.Proponente PATCH success count',
@@ -93,7 +93,7 @@ export class SolicitudProponenteController {
     return this.solicitudRepository.proponentes(id).patch(proponente, where);
   }
 
-  @del('/solicituds/{id}/proponentes', {
+  @del('/solicitudes/{id}/proponentes', {
     responses: {
       '200': {
         description: 'Solicitud.Proponente DELETE success count',
