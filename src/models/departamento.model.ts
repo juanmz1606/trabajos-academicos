@@ -3,7 +3,18 @@ import {Facultad} from './facultad.model';
 import {Proponente} from './proponente.model';
 import {ProponenteDepartamento} from './proponente-departamento.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_departamento_id_facultad: {
+        name: 'fk_departamento_id_facultad',
+        entity: 'Facultad',
+        entityKey: 'id',
+        foreignKey: 'id_facultad',
+      }
+    },
+  },
+})
 export class Departamento extends Entity {
   @property({
     type: 'number',

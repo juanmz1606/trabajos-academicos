@@ -5,7 +5,18 @@ import {TipoVinculacion} from './tipo-vinculacion.model';
 import {Solicitud} from './solicitud.model';
 import {SolicitudProponente} from './solicitud-proponente.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_proponente_id_tip_vin: {
+        name: 'fk_proponente_id_tip_vin',
+        entity: 'TipoVinculacion',
+        entityKey: 'id',
+        foreignKey: 'id_tipoVinculacion',
+      }
+    },
+  },
+})
 export class Proponente extends Entity {
   @property({
     type: 'number',

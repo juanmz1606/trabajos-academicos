@@ -4,7 +4,24 @@ import {Jurado} from './jurado.model';
 import {ResultadoEvaluacion} from './resultado-evaluacion.model';
 import {Recordatorio} from './recordatorio.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_inv_eva_id_solicitud: {
+        name: 'fk_inv_eva_id_solicitud',
+        entity: 'Solicitud',
+        entityKey: 'id',
+        foreignKey: 'id_solicitud',
+      },
+      fk_inv_eva_id_jurado: {
+        name: 'fk_inv_eva_id_jurado',
+        entity: 'Jurado',
+        entityKey: 'id',
+        foreignKey: 'id_jurado',
+      }
+    },
+  },
+})
 export class InvitacionEvaluar extends Entity {
   @property({
     type: 'number',
