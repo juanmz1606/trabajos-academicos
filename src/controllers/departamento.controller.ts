@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {Departamento} from '../models';
 import {DepartamentoRepository} from '../repositories';
 
+@authenticate("admin")
 export class DepartamentoController {
   constructor(
     @repository(DepartamentoRepository)
@@ -58,6 +60,7 @@ export class DepartamentoController {
     return this.departamentoRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/departamentos')
   @response(200, {
     description: 'Array of Departamento model instances',

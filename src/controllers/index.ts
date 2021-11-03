@@ -41,3 +41,5 @@ export * from './jurado.controller';
 export * from './invitacion-evaluar.controller';
 export * from './resultado-evaluacion.controller';
 export * from './recordatorio.controller';
+export * from './carga-archivos.controller';
+export * from './descargar-archivos.controller';

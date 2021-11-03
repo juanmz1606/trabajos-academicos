@@ -5,7 +5,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
-  import {
+import {
   del,
   get,
   getModelSchemaRef,
@@ -14,17 +14,20 @@ import {
   patch,
   post,
   requestBody,
+  response,
 } from '@loopback/rest';
 import {
-Solicitud,
-SolicitudProponente,
-Proponente,
+  Solicitud,
+  SolicitudProponente,
+  Proponente,
+  ArregloProponentes,
 } from '../models';
-import {SolicitudRepository} from '../repositories';
+import {SolicitudRepository, SolicitudProponenteRepository} from '../repositories';
 
 export class SolicitudProponenteController {
   constructor(
     @repository(SolicitudRepository) protected solicitudRepository: SolicitudRepository,
+    @repository(SolicitudProponenteRepository) protected SolicitudProponenteRepository: SolicitudProponenteRepository,
   ) { }
 
   @get('/solicitudes/{id}/proponentes', {
@@ -46,28 +49,66 @@ export class SolicitudProponenteController {
     return this.solicitudRepository.proponentes(id).find(filter);
   }
 
-  @post('/solicitudes/{id}/proponentes', {
+  @post('/solicitud-proponente', {
     responses: {
       '200': {
-        description: 'create a Proponente model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Proponente)}},
+        description: 'create a instance of proponente with a solicitud',
+        content: {'application/json': {schema: getModelSchemaRef(SolicitudProponente)}},
       },
     },
   })
-  async create(
-    @param.path.number('id') id: typeof Solicitud.prototype.id,
+  async createRelation(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Proponente, {
-            title: 'NewProponenteInSolicitud',
+          schema: getModelSchemaRef(SolicitudProponente, {
+            title: 'NewProponenteWithSolicitud',
             exclude: ['id'],
           }),
         },
       },
-    }) proponente: Omit<Proponente, 'id'>,
-  ): Promise<Proponente> {
-    return this.solicitudRepository.proponentes(id).create(proponente);
+    }) datos: Omit<SolicitudProponente, 'id'>,
+  ): Promise<SolicitudProponente | null> {
+    let registro = await this.SolicitudProponenteRepository.create(datos);
+    return registro;
+  }
+
+  @post('/asociar-solicitud-proponente/{id}', {
+    responses: {
+      '200': {
+        description: 'create a instance of proponente with a solicitud',
+        content: {'application/json': {schema: getModelSchemaRef(SolicitudProponente)}},
+      },
+    },
+  })
+  async createRelations(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(ArregloProponentes, {}),
+        },
+      },
+    }) datos: ArregloProponentes,
+    @param.path.number('id') id_solicitud: typeof Solicitud.prototype.id
+  ): Promise<Boolean> {
+    if (datos.proponentes.length > 0) {
+      datos.proponentes.forEach(async (id_proponente: number) => {
+        let existe = await this.SolicitudProponenteRepository.findOne({
+          where: {
+            id_solicitud: id_solicitud,
+            id_proponente: id_proponente
+          }
+        });
+        if (!existe) {
+          this.SolicitudProponenteRepository.create({
+            id_solicitud: id_solicitud,
+            id_proponente: id_proponente
+          });
+        }
+      });
+      return true
+    }
+    return false;
   }
 
   @patch('/solicitudes/{id}/proponentes', {
@@ -106,5 +147,25 @@ export class SolicitudProponenteController {
     @param.query.object('where', getWhereSchemaFor(Proponente)) where?: Where<Proponente>,
   ): Promise<Count> {
     return this.solicitudRepository.proponentes(id).delete(where);
+  }
+
+  @del('/solicitudes/{id_solicitud}/{id_proponente}')
+  @response(204, {
+    description: 'Relation DELETE success',
+  })
+  async EliminarProponente(
+    @param.path.number('id_solicitud') id_solicitud: number,
+    @param.path.number('id_proponente') id_proponente: number): Promise<Boolean> {
+    let registro = await this.SolicitudProponenteRepository.findOne({
+      where: {
+        id_solicitud: id_solicitud,
+        id_proponente: id_proponente
+      }
+    });
+    if (registro) {
+      await this.SolicitudProponenteRepository.deleteById(registro.id);
+      return true;
+    }
+    return false;
   }
 }

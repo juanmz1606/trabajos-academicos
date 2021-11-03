@@ -49,10 +49,10 @@ export class Proponente extends Entity {
   segundoApellido: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  documento: number;
+  documento: string;
 
   @property({
     type: 'date',

@@ -16,3 +16,7 @@ export * from './invitacion-evaluar.model';
 export * from './resultado-evaluacion.model';
 export * from './comite-solicitud.model';
 export * from './comite.model';
+export * from './arreglo-lineas-investigacion.model';
+export * from './arreglo-proponentes.model';
+export * from './arreglo-solicitudes.model';
+export * from './arreglo-departamentos.model';
