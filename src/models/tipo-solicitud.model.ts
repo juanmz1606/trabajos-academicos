@@ -18,9 +18,8 @@ export class TipoSolicitud extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  formato: string;
+  formato?: string;
 
   @hasMany(() => Solicitud, {keyTo: 'id_tipoSolicitud'})
   solicitudes: Solicitud[];

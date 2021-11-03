@@ -11,12 +11,16 @@ import multer from 'multer';
 import path from 'path';
 import {Keys as llaves} from '../config/keys';
 import {Proponente} from '../models';
-import {ProponenteRepository} from '../repositories';
+import {ProponenteRepository,TipoSolicitudRepository,SolicitudRepository} from '../repositories';
 
 export class CargarArchivosController {
   constructor(
     @repository(ProponenteRepository)
-    private ProponenteRepository: ProponenteRepository
+    private ProponenteRepository: ProponenteRepository,
+    @repository(TipoSolicitudRepository)
+    private TipoSolicitudRepository: TipoSolicitudRepository,
+    @repository(SolicitudRepository)
+    private SolicitudRepository: SolicitudRepository
   ) { }
 
   /**
@@ -63,39 +67,93 @@ export class CargarArchivosController {
     return res;
   }
 
-  // /**
-  //  *
-  //  * @param response
-  //  * @param request
-  //  */
-  // @post('/CargarDocumentoPersona', {
-  //   responses: {
-  //     200: {
-  //       content: {
-  //         'application/json': {
-  //           schema: {
-  //             type: 'object',
-  //           },
-  //         },
-  //       },
-  //       description: 'Función de carga de documentos de la persona.',
-  //     },
-  //   },
-  // })
-  // async DocumentosPersona(
-  //   @inject(RestBindings.Http.RESPONSE) response: Response,
-  //   @requestBody.file() request: Request,
-  // ): Promise<object | false> {
-  //   const rutaDocumentoPersona = path.join(__dirname, llaves.carpetaDocumentoPersona);
-  //   let res = await this.StoreFileToPath(rutaDocumentoPersona, llaves.nombreCampoDocumentoPersona, request, response, llaves.extensionesPermitidasDOC);
-  //   if (res) {
-  //     const nombre_archivo = response.req?.file?.filename;
-  //     if (nombre_archivo) {
-  //       return {filename: nombre_archivo};
-  //     }
-  //   }
-  //   return res;
-  // }
+   /**
+    *
+    * @param response
+    * @param request
+    */
+   @post('/CargarFormatoTipoSolicitud/{id_tipoSolicitud}', {
+     responses: {
+       200: {
+         content: {
+           'application/json': {
+             schema: {
+               type: 'object',
+             },
+           },
+         },
+         description: 'Función de carga de archivo de un tipo de solicitud.',
+       },
+     },
+   })
+   async CargarFormatoTipoSolicitud(
+     @inject(RestBindings.Http.RESPONSE) response: Response,
+     @requestBody.file() request: Request,
+     @param.path.number("id_tipoSolicitud") id_tipoSolicitud: number
+   ): Promise<object | false> {
+     const rutaFormatoTipoSolicitud = path.join(__dirname, llaves.carpetaArchivoTrabajo);
+     let res = await this.StoreFileToPath(rutaFormatoTipoSolicitud, llaves.nombreCampoArchivoTrabajo, request, response, llaves.extensionesPermitidasDOC);
+     if (res) {
+       const nombre_archivo = response.req?.file?.filename;
+       if (nombre_archivo) {
+        let tipoSolicitud = await this.TipoSolicitudRepository.findOne({
+          where: {
+            id: id_tipoSolicitud
+          }
+        });
+        if (tipoSolicitud) {
+          tipoSolicitud.formato = nombre_archivo;
+          await this.TipoSolicitudRepository.update(tipoSolicitud);
+          return {filename: nombre_archivo};
+        }
+       }
+     }
+     return res;
+   }
+
+   /**
+    *
+    * @param response
+    * @param request
+    */
+    @post('/CargarArchivoSolicitud/{id_solicitud}', {
+      responses: {
+        200: {
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+              },
+            },
+          },
+          description: 'Función de carga de archivo de una solicitud.',
+        },
+      },
+    })
+    async CargarArchivoSolicitud(
+      @inject(RestBindings.Http.RESPONSE) response: Response,
+      @requestBody.file() request: Request,
+      @param.path.number("id_solicitud") id_solicitud: number
+    ): Promise<object | false> {
+      const rutaCargarArchivoSolicitud = path.join(__dirname, llaves.carpetaArchivoTrabajo);
+      let res = await this.StoreFileToPath(rutaCargarArchivoSolicitud, llaves.nombreCampoArchivoTrabajo, request, response, llaves.extensionesPermitidasDOC);
+      if (res) {
+        const nombre_archivo = response.req?.file?.filename;
+        if (nombre_archivo) {
+         let solicitud = await this.SolicitudRepository.findOne({
+           where: {
+             id: id_solicitud
+           }
+         });
+         if (solicitud) {
+          solicitud.archivo = nombre_archivo;
+           await this.SolicitudRepository.update(solicitud);
+           return {filename: nombre_archivo};
+         }
+        }
+      }
+      return res;
+    }
 
 
   /**

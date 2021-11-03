@@ -44,7 +44,9 @@ export class InvitacionEvaluarController {
     })
     invitacionEvaluar: Omit<InvitacionEvaluar, 'id'>,
   ): Promise<InvitacionEvaluar> {
+    /// Enviar correo con link con hash que permita responder la invitacion
     return this.invitacionEvaluarRepository.create(invitacionEvaluar);
+
   }
 
   @get('/invitaciones-evaluar/count')
