@@ -38,9 +38,8 @@ export class InvitacionEvaluar extends Entity {
 
   @property({
     type: 'date',
-    required: true,
   })
-  fechaRespuesta: string;
+  fechaRespuesta?: string;
 
   @property({
     type: 'string',
@@ -50,9 +49,8 @@ export class InvitacionEvaluar extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  observaciones: string;
+  observaciones?: string;
 
   @belongsTo(() => Solicitud, {name: 'tiene_solicitud'})
   id_solicitud: number;

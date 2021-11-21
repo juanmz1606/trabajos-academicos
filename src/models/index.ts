@@ -20,3 +20,4 @@ export * from './arreglo-lineas-investigacion.model';
 export * from './arreglo-proponentes.model';
 export * from './arreglo-solicitudes.model';
 export * from './arreglo-departamentos.model';
+export * from './notificacion-correo.model';

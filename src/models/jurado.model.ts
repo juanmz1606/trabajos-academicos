@@ -35,6 +35,12 @@ export class Jurado extends Entity {
   })
   entidad: string;
 
+  @property({
+    type: 'string',
+    default: '',
+  })
+  hash: string;
+
   @hasMany(() => LineaInvestigacion, {through: {model: () => JuradoLineaInvestigacion, keyFrom: 'id_jurado', keyTo: 'id_lineaInvestigacion'}})
   lineasInvestigacion: LineaInvestigacion[];
 
