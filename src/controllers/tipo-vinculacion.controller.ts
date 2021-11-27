@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {TipoVinculacion} from '../models';
 import {TipoVinculacionRepository} from '../repositories';
 
+@authenticate("admin")
 export class TipoVinculacionController {
   constructor(
     @repository(TipoVinculacionRepository)
@@ -58,6 +60,7 @@ export class TipoVinculacionController {
     return this.tipoVinculacionRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/tipos-vinculacion')
   @response(200, {
     description: 'Array of TipoVinculacion model instances',
@@ -95,6 +98,7 @@ export class TipoVinculacionController {
     return this.tipoVinculacionRepository.updateAll(tipoVinculacion, where);
   }
 
+  @authenticate.skip()
   @get('/tipos-vinculacion/{id}')
   @response(200, {
     description: 'TipoVinculacion model instance',

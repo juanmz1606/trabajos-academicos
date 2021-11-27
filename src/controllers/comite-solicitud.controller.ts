@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -24,12 +25,14 @@ Solicitud,
 } from '../models';
 import {ComiteRepository, ComiteSolicitudRepository} from '../repositories';
 
+@authenticate("admin")
 export class ComiteSolicitudController {
   constructor(
     @repository(ComiteRepository) protected comiteRepository: ComiteRepository,
     @repository(ComiteSolicitudRepository) protected comiteSolicitudRepository: ComiteSolicitudRepository,
   ) { }
 
+  @authenticate.skip()
   @get('/comites/{id}/solicitudes', {
     responses: {
       '200': {

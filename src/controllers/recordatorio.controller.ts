@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {Recordatorio} from '../models';
 import {RecordatorioRepository} from '../repositories';
 
+@authenticate("admin")
 export class RecordatorioController {
   constructor(
     @repository(RecordatorioRepository)
@@ -58,6 +60,7 @@ export class RecordatorioController {
     return this.recordatorioRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/recordatorios')
   @response(200, {
     description: 'Array of Recordatorio model instances',
@@ -95,6 +98,7 @@ export class RecordatorioController {
     return this.recordatorioRepository.updateAll(recordatorio, where);
   }
 
+  @authenticate.skip()
   @get('/recordatorios/{id}')
   @response(200, {
     description: 'Recordatorio model instance',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {Proponente} from '../models';
 import {ProponenteRepository} from '../repositories';
 
+@authenticate("admin")
 export class ProponenteController {
   constructor(
     @repository(ProponenteRepository)
@@ -44,7 +46,7 @@ export class ProponenteController {
     })
     proponente: Omit<Proponente, 'id'>,
   ): Promise<Proponente> {
-    
+
     return this.proponenteRepository.create(proponente);
   }
 
@@ -59,6 +61,7 @@ export class ProponenteController {
     return this.proponenteRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/proponentes')
   @response(200, {
     description: 'Array of Proponente model instances',
@@ -96,6 +99,7 @@ export class ProponenteController {
     return this.proponenteRepository.updateAll(proponente, where);
   }
 
+  @authenticate.skip()
   @get('/proponentes/{id}')
   @response(200, {
     description: 'Proponente model instance',

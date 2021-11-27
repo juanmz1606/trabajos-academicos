@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -21,11 +22,13 @@ import {
 } from '../models';
 import {LineaInvestigacionRepository} from '../repositories';
 
+@authenticate("admin")
 export class LineaInvestigacionSolicitudController {
   constructor(
     @repository(LineaInvestigacionRepository) protected lineaInvestigacionRepository: LineaInvestigacionRepository,
   ) { }
 
+  @authenticate.skip()
   @get('/lineas-investigacion/{id}/solicitudes', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -21,11 +22,14 @@ import {
 } from '../models';
 import {InvitacionEvaluarRepository} from '../repositories';
 
+
+@authenticate("admin")
 export class InvitacionEvaluarRecordatorioController {
   constructor(
     @repository(InvitacionEvaluarRepository) protected invitacionEvaluarRepository: InvitacionEvaluarRepository,
   ) { }
 
+  @authenticate.skip()
   @get('/invitaciones-evaluar/{id}/recordatorios', {
     responses: {
       '200': {

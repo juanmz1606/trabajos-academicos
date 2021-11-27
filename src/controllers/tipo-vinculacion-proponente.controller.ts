@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -21,11 +22,13 @@ import {
 } from '../models';
 import {TipoVinculacionRepository} from '../repositories';
 
+@authenticate("admin")
 export class TipoVinculacionProponenteController {
   constructor(
     @repository(TipoVinculacionRepository) protected tipoVinculacionRepository: TipoVinculacionRepository,
   ) { }
 
+  @authenticate.skip()
   @get('/tipos-vinculacion/{id}/proponentes', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -21,11 +22,14 @@ import {
 } from '../models';
 import {ModalidadRepository} from '../repositories';
 
+
+@authenticate("admin")
 export class ModalidadSolicitudController {
   constructor(
     @repository(ModalidadRepository) protected modalidadRepository: ModalidadRepository,
   ) { }
 
+  @authenticate.skip()
   @get('/modalidades/{id}/solicitudes', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {ResultadoEvaluacion} from '../models';
 import {ResultadoEvaluacionRepository} from '../repositories';
 
+@authenticate("admin")
 export class ResultadoEvaluacionController {
   constructor(
     @repository(ResultadoEvaluacionRepository)
@@ -58,6 +60,7 @@ export class ResultadoEvaluacionController {
     return this.resultadoEvaluacionRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/resultados-evaluacion')
   @response(200, {
     description: 'Array of ResultadoEvaluacion model instances',
@@ -95,6 +98,7 @@ export class ResultadoEvaluacionController {
     return this.resultadoEvaluacionRepository.updateAll(resultadoEvaluacion, where);
   }
 
+  @authenticate.skip()
   @get('/resultados-evaluacion/{id}')
   @response(200, {
     description: 'ResultadoEvaluacion model instance',

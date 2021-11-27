@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
@@ -24,6 +25,8 @@ import {InvitacionEvaluarRepository, JuradoRepository} from '../repositories';
 import {NotificacionesService} from '../services';
 const createHash = require('hash-generator');
 
+
+@authenticate("admin")
 export class InvitacionEvaluarController {
   constructor(
     @repository(InvitacionEvaluarRepository)
@@ -93,6 +96,7 @@ export class InvitacionEvaluarController {
     return this.invitacionEvaluarRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/invitaciones-evaluar')
   @response(200, {
     description: 'Array of InvitacionEvaluar model instances',
@@ -130,6 +134,7 @@ export class InvitacionEvaluarController {
     return this.invitacionEvaluarRepository.updateAll(invitacionEvaluar, where);
   }
 
+  @authenticate.skip()
   @get('/invitaciones-evaluar/{id}')
   @response(200, {
     description: 'InvitacionEvaluar model instance',
