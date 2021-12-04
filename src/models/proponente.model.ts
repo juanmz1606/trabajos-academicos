@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo, hasOne} from '@loopback/repository';
 import {Departamento} from './departamento.model';
 import {ProponenteDepartamento} from './proponente-departamento.model';
 import {TipoVinculacion} from './tipo-vinculacion.model';
@@ -55,7 +55,7 @@ export class Proponente extends Entity {
   documento: string;
 
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
   })
   fechaNacimiento: string;
@@ -79,11 +79,11 @@ export class Proponente extends Entity {
   @hasMany(() => Departamento, {through: {model: () => ProponenteDepartamento, keyFrom: 'id_proponente', keyTo: 'id_departamento'}})
   departamentos: Departamento[];
 
-  @belongsTo(() => TipoVinculacion, {name: 'tiene_tipoVinculacion'})
-  id_tipoVinculacion: number;
-
   @hasMany(() => Solicitud, {through: {model: () => SolicitudProponente, keyFrom: 'id_proponente', keyTo: 'id_solicitud'}})
   solicitudes: Solicitud[];
+
+  @belongsTo(() => TipoVinculacion, {name: 'tiene_tipoVinculacion'})
+  id_tipoVinculacion: number;
 
   constructor(data?: Partial<Proponente>) {
     super(data);

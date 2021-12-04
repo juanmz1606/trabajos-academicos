@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {inject} from '@loopback/core';
 import {repository} from '@loopback/repository';
 import {
@@ -12,6 +13,7 @@ import path from 'path';
 import {Keys as llaves} from '../config/keys';
 import {ProponenteRepository, TipoSolicitudRepository, SolicitudRepository} from '../repositories';
 
+authenticate("admin")
 export class CargarArchivosController {
   constructor(
     @repository(ProponenteRepository)
@@ -139,6 +141,41 @@ export class CargarArchivosController {
           await this.TipoSolicitudRepository.update(tipoSolicitud);
           return {filename: nombre_archivo};
         }
+      }
+    }
+    return res;
+  }
+
+  /**
+   *
+   * @param response
+   * @param request
+   */
+   @post('/CargarArchivoSolicitud', {
+    responses: {
+      200: {
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+            },
+          },
+        },
+        description: 'Función de carga de archivo de una solicitud.',
+      },
+    },
+  })
+  async CargarTrabajoSolicitud(
+    @inject(RestBindings.Http.RESPONSE) response: Response,
+    @requestBody.file() request: Request,
+    @param.path.number("id_solicitud") id_solicitud: number
+  ): Promise<object | false> {
+    const rutaCargarArchivoSolicitud = path.join(__dirname, llaves.carpetaArchivoTrabajo);
+    let res = await this.StoreFileToPath(rutaCargarArchivoSolicitud, llaves.nombreCampoArchivoTrabajo, request, response, llaves.extensionesPermitidasDOC);
+    if (res) {
+      const nombre_archivo = response.req?.file?.filename;
+      if (nombre_archivo) {
+        return {filename: nombre_archivo};
       }
     }
     return res;

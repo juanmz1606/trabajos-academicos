@@ -1,4 +1,3 @@
-import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -22,14 +21,12 @@ import {
 } from '../models';
 import {TipoVinculacionRepository} from '../repositories';
 
-@authenticate("admin")
 export class TipoVinculacionProponenteController {
   constructor(
     @repository(TipoVinculacionRepository) protected tipoVinculacionRepository: TipoVinculacionRepository,
   ) { }
 
-  @authenticate.skip()
-  @get('/tipos-vinculacion/{id}/proponentes', {
+  @get('/tipo-vinculacions/{id}/proponentes', {
     responses: {
       '200': {
         description: 'Array of TipoVinculacion has many Proponente',
@@ -48,7 +45,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).find(filter);
   }
 
-  @post('/tipos-vinculacion/{id}/proponentes', {
+  @post('/tipo-vinculacions/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion model instance',
@@ -73,7 +70,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).create(proponente);
   }
 
-  @patch('/tipos-vinculacion/{id}/proponentes', {
+  @patch('/tipo-vinculacions/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion.Proponente PATCH success count',
@@ -96,7 +93,7 @@ export class TipoVinculacionProponenteController {
     return this.tipoVinculacionRepository.proponentes(id).patch(proponente, where);
   }
 
-  @del('/tipos-vinculacion/{id}/proponentes', {
+  @del('/tipo-vinculacions/{id}/proponentes', {
     responses: {
       '200': {
         description: 'TipoVinculacion.Proponente DELETE success count',

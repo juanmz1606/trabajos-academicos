@@ -31,13 +31,13 @@ export class InvitacionEvaluar extends Entity {
   id?: number;
 
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
   })
   fechaInvitacion: string;
 
   @property({
-    type: 'date',
+    type: 'string',
   })
   fechaRespuesta?: string;
 
