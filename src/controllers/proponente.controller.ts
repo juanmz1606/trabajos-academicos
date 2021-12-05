@@ -25,7 +25,7 @@ import {ProponenteRepository} from '../repositories';
 export class ProponenteController {
   constructor(
     @repository(ProponenteRepository)
-    public proponenteRepository : ProponenteRepository,
+    public proponenteRepository : ProponenteRepository
   ) {}
 
   @post('/proponentes')
@@ -46,7 +46,6 @@ export class ProponenteController {
     })
     proponente: Omit<Proponente, 'id'>,
   ): Promise<Proponente> {
-
     return this.proponenteRepository.create(proponente);
   }
 

@@ -95,6 +95,8 @@ export class ProponenteDepartamentoController {
     @param.path.number('id') id_proponente: typeof Proponente.prototype.id
   ): Promise<Boolean> {
     if (datos.departamentos.length > 0) {
+
+
       datos.departamentos.forEach(async (id_departamento: number) => {
         let existe = await this.proponenteDepartamentoRepository.findOne({
           where: {
