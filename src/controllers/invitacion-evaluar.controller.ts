@@ -69,7 +69,11 @@ export class InvitacionEvaluarController {
         }
       });
       if (jurado) {
-        
+        let url = ``;
+        fetch(url)
+          .then((res: any) => {
+            console.log(res.text());
+          })
         let hash = createHash(30);
         let datos = new NotificacionCorreo();
         datos.hash = hash;
@@ -79,7 +83,7 @@ export class InvitacionEvaluarController {
         <p>${Keys.saludo} ${jurado.nombre}</p>
         <p> ${Keys.mensajeInviEval} </p>
         <a>Rechazar</a>
-        <a target="_blank"">Aceptar</a>
+        <a target="_blank" href="http://localhost:4200/seguridad/crear-usuario-jurado/${jurado.id}">Aceptar</a>
         `;
 
 
