@@ -2,7 +2,7 @@ export namespace Keys{
   export const carpetaFotografia = "../../archivos/proponentes/";
   export const nombreCampoFotografia = 'file';
   export const extensionesPermitidasIMG: string[] = ['.PNG', '.JPG', '.JPEG', '.SVG'];
-  export const tamMaxFotografia = 1024 * 1024;
+  export const tamMax = 20971520;
   export const carpetaArchivoTrabajo = '../../archivos/solicitudes';
   export const nombreCampoArchivoTrabajo = 'file';
   export const extensionesPermitidasDOC: string[] = ['.PDF', '.DOC', '.DOCX', '.XLS', '.XLSX'];
@@ -19,5 +19,6 @@ export namespace Keys{
   export const hashNotificacion = "ABC123";
   export const saludo = "Hola"
   export const asuntoInviEval = "Invitación a evaluar";
-  export const mensajeInviEval = "Querido y respetado jurado, ha sido elegido para evaluar un hermoso trabajo.";
+  export const mensajeInviEval = "Querido y respetado jurado, ha sido elegido para evaluar un trabajo.";
+  export const mensajeInviEvalCred = "Estas son sus credenciales de acceso:";
 }

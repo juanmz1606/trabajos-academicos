@@ -151,6 +151,40 @@ export class CargarArchivosController {
    * @param response
    * @param request
    */
+   @post('/CargarFormatoTipoSolicitud', {
+    responses: {
+      200: {
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+            },
+          },
+        },
+        description: 'Función de carga de archivo de un tipo de solicitud.',
+      },
+    },
+  })
+  async CargarFormatoTrabajoTipoSolicitud(
+    @inject(RestBindings.Http.RESPONSE) response: Response,
+    @requestBody.file() request: Request
+  ): Promise<object | false> {
+    const rutaFormatoTipoSolicitud = path.join(__dirname, llaves.carpetaArchivoTrabajo);
+    let res = await this.StoreFileToPath(rutaFormatoTipoSolicitud, llaves.nombreCampoArchivoTrabajo, request, response, llaves.extensionesPermitidasDOC);
+    if (res) {
+      const nombre_archivo = response.req?.file?.filename;
+      if (nombre_archivo) {
+        return {filename: nombre_archivo};
+      }
+    }
+    return res;
+  }
+
+  /**
+   *
+   * @param response
+   * @param request
+   */
    @post('/CargarArchivoSolicitud', {
     responses: {
       200: {
@@ -167,8 +201,7 @@ export class CargarArchivosController {
   })
   async CargarTrabajoSolicitud(
     @inject(RestBindings.Http.RESPONSE) response: Response,
-    @requestBody.file() request: Request,
-    @param.path.number("id_solicitud") id_solicitud: number
+    @requestBody.file() request: Request
   ): Promise<object | false> {
     const rutaCargarArchivoSolicitud = path.join(__dirname, llaves.carpetaArchivoTrabajo);
     let res = await this.StoreFileToPath(rutaCargarArchivoSolicitud, llaves.nombreCampoArchivoTrabajo, request, response, llaves.extensionesPermitidasDOC);
@@ -263,7 +296,7 @@ export class CargarArchivosController {
           return callback(new HttpErrors[400]('El formato del archivo no es permitido.'));
         },
         limits: {
-          fileSize: llaves.tamMaxFotografia
+          fileSize: llaves.tamMax
         }
       },
       ).single(fieldname);

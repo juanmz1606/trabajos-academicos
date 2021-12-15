@@ -24,6 +24,7 @@ import {InvitacionEvaluar, NotificacionCorreo} from '../models';
 import {InvitacionEvaluarRepository, JuradoRepository} from '../repositories';
 import {NotificacionesService} from '../services';
 const createHash = require('hash-generator');
+const fetch = require('node-fetch');
 
 
 @authenticate("admin")
@@ -54,35 +55,41 @@ export class InvitacionEvaluarController {
       },
     })
     invitacionEvaluar: Omit<InvitacionEvaluar, 'id'>,
-  ): Promise<InvitacionEvaluar> {
-    let jurado = await this.juradoRepository.findOne({
+  ): Promise<Boolean> {
+    let data = await this.invitacionEvaluarRepository.findOne({
       where: {
-        id: invitacionEvaluar.id_jurado
+        id_solicitud: invitacionEvaluar.id_solicitud,
+        id_jurado: invitacionEvaluar.id_jurado
       }
     });
+    if (!data) {
+      let jurado = await this.juradoRepository.findOne({
+        where: {
+          id: invitacionEvaluar.id_jurado
+        }
+      });
+      if (jurado) {
+        
+        let hash = createHash(30);
+        let datos = new NotificacionCorreo();
+        datos.hash = hash;
+        datos.destinatario = jurado.email;
+        datos.asunto = Keys.asuntoInviEval;
+        datos.mensaje = `
+        <p>${Keys.saludo} ${jurado.nombre}</p>
+        <p> ${Keys.mensajeInviEval} </p>
+        <a>Rechazar</a>
+        <a target="_blank"">Aceptar</a>
+        `;
 
-    if (jurado) {
-      let hash = createHash(30);
-      let datos = new NotificacionCorreo();
-      datos.hash = hash;
-      datos.destinatario = jurado.email;
-      datos.asunto = Keys.asuntoInviEval;
-      datos.mensaje = `
-      <p>${Keys.saludo} ${jurado.nombre}</p>
-      <p> ${Keys.mensajeInviEval} </p>
-      <p>${datos.hash}</p>
-      <a target="_blank" style="background-color: crimson;
-      color: white; padding: 15px 20px; text-decoration: none; border-radius: 10px; border"
-      href="https://www.freecodecamp.org/">Rechazar</a>
 
-      <a target="_blank" style="margin-left: 50px; background-color: green;color: rgba(236, 234, 234, 0.986);
-      padding: 15px 25px; text-decoration: none; border-radius: 10px; border"
-      href="https://www.freecodecamp.org/hash/id_jurado">Aceptar</a>
-      `;
-      jurado.hash = hash
-      this.servicioNotificaciones.EnviarCorreo(datos);
+        jurado.hash = hash
+        this.servicioNotificaciones.EnviarCorreo(datos);
+        this.invitacionEvaluarRepository.create(invitacionEvaluar);
+        return true
+      }
     }
-    return this.invitacionEvaluarRepository.create(invitacionEvaluar);
+    return false;
   }
 
   @get('/invitaciones-evaluar/count')
